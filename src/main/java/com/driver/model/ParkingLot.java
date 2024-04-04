@@ -1,19 +1,37 @@
 package com.driver.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class ParkingLot {
+@Table(name = "user")
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
-    private String address;
 
-    @OneToMany(mappedBy = "parkingLot",cascade = CascadeType.ALL)
-    List<Spot> spotList;
+    private String phoneNumber;
+
+    private String password;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    List<Reservation> reservationList = new ArrayList<>();
+
+    // MAKE CONSTRUCTOR AND GETTER/SETTER
+    public User() {
+    }
+
+    public User(int id, String name, String phoneNumber, String password, List<Reservation> reservationList) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.reservationList = reservationList;
+    }
 
     public int getId() {
         return id;
@@ -31,19 +49,27 @@ public class ParkingLot {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public List<Spot> getSpotList() {
-        return spotList;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSpotList(List<Spot> spotList) {
-        this.spotList = spotList;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Reservation> getReservationList() {
+        return reservationList;
+    }
+
+    public void setReservationList(List<Reservation> reservationList) {
+        this.reservationList = reservationList;
     }
 }
