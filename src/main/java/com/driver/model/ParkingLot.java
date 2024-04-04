@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "parkingLot")
+public class ParkingLot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,23 +14,21 @@ public class User {
 
     private String name;
 
-    private String phoneNumber;
+    private String address;
 
-    private String password;
-
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    List<Reservation> reservationList = new ArrayList<>();
+    @OneToMany(mappedBy = "parkingLot",cascade = CascadeType.ALL)
+    List<Spot> spotList = new ArrayList<>();
 
     // MAKE CONSTRUCTOR AND GETTER/SETTER
-    public User() {
+
+    public ParkingLot() {
     }
 
-    public User(int id, String name, String phoneNumber, String password, List<Reservation> reservationList) {
+    public ParkingLot(int id, String name, String address, List<Spot> spotList) {
         this.id = id;
         this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.reservationList = reservationList;
+        this.address = address;
+        this.spotList = spotList;
     }
 
     public int getId() {
@@ -49,27 +47,19 @@ public class User {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getPassword() {
-        return password;
+    public List<Spot> getSpotList() {
+        return spotList;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<Reservation> getReservationList() {
-        return reservationList;
-    }
-
-    public void setReservationList(List<Reservation> reservationList) {
-        this.reservationList = reservationList;
+    public void setSpotList(List<Spot> spotList) {
+        this.spotList = spotList;
     }
 }
